@@ -1,3 +1,16 @@
+This is a Patch/Fixed Fork of Gate One
+=====================================
+
+This `forked Github repository <https://github.com/dcwangmit01/GateOne>`_ is a patched/fixed version of the `official GateOne repository <https://github.com/liftoff/GateOne>`_, which seems to be unmaintained.
+
+It has been added to DockerHub as an automated build, found at `<https://hub.docker.com/r/dcwangmit01/gateone>`_
+
+In order to make the original code compile and run, this fork has made the following changes:
+
+* Merged the PR `<https://github.com/liftoff/GateOne/pull/699>`_
+* Added a commit to pin the Dockerfile FROM tag to `ubuntu:xenial`
+
+
 About Gate One
 ==============
 `Gate One <http://liftoffsoftware.com/Products/GateOne>`_ is an HTML5 web-based terminal emulator and SSH client.  Top features:
