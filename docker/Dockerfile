@@ -30,10 +30,10 @@
 #
 ############################################################
 
-FROM ubuntu
+FROM ubuntu:xenial
 MAINTAINER Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
 
-ENV GATEONE_REPO_URL https://github.com/liftoff/GateOne.git
+ENV GATEONE_REPO_URL https://github.com/dcwangmit01/GateOne.git
 
 # Ensure everything is up-to-date
 ENV DEBIAN_FRONTEND noninteractive
