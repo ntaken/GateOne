@@ -31,9 +31,6 @@
 ############################################################
 
 FROM ubuntu:xenial
-MAINTAINER Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
-
-ENV GATEONE_REPO_URL https://github.com/dcwangmit01/GateOne.git
 
 # Ensure everything is up-to-date
 ENV DEBIAN_FRONTEND noninteractive
@@ -54,20 +51,19 @@ RUN apt-get -y \
     apt-get -q -y autoremove
 
 RUN pip install --upgrade pip
-COPY requirements.txt /tmp/requirements.txt
+COPY docker/requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
+RUN mkdir -p /gateone/logs /gateone/users
+COPY . /gateone/GateOne
+
 
 # Create the necessary directories, clone the repo, and install everything
-RUN mkdir -p /gateone/logs && \
-    mkdir -p /gateone/users && \
-    mkdir -p /etc/gateone/conf.d && \
+RUN mkdir -p /etc/gateone/conf.d && \
     mkdir -p /etc/gateone/ssl && \
-    cd /gateone && \
-    git clone $GATEONE_REPO_URL && \
-    cd GateOne && \
+    cd /gateone/GateOne && \
     python setup.py install && \
-    cp docker/update_and_run_gateone.py /usr/local/bin/update_and_run_gateone && \
-    cp docker/60docker.conf /etc/gateone/conf.d/60docker.conf
+    cp docker/update_and_run_gateone.py /usr/local/bin/update_and_run_gateone
+COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 
 # This ensures our configuration files/dirs are created:
 RUN /usr/local/bin/gateone --configure \
