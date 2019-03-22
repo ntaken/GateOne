@@ -77,4 +77,4 @@ RUN rm -f /etc/gateone/ssl/key.pem && \
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/local/bin/update_and_run_gateone", "--log_file_prefix=/gateone/logs/gateone.log"]
+ENTRYPOINT ["/usr/local/bin/gateone", "--log_file_prefix=/gateone/logs/gateone.log"]
