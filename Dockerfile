@@ -32,6 +32,11 @@
 
 FROM python:2.7-alpine
 
+RUN apk add --update --no-cache g++
+RUN apk add --update --no-cache linux-headers
+RUN apk add --update --no-cache openssl
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8
 COPY docker/requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 RUN mkdir -p /gateone/logs /gateone/users
