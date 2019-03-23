@@ -32,30 +32,26 @@
 
 FROM python:2.7-alpine
 
-RUN apk add --update --no-cache g++
-RUN apk add --update --no-cache linux-headers
-RUN apk add --update --no-cache openssl
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
 COPY docker/requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
-RUN mkdir -p /gateone/logs /gateone/users
-COPY . /gateone/GateOne
 
-RUN mkdir -p /etc/gateone/conf.d /etc/gateone/ssl && \
-    cd /gateone/GateOne && \
-    python setup.py install
+RUN mkdir -p /gateone/logs /gateone/users \
+             /etc/gateone/conf.d /etc/gateone/ssl
+
+COPY . /gateone/GateOne
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 
-# This ensures our configuration files/dirs are created:
-RUN /usr/local/bin/gateone --configure \
-    --log_file_prefix="/gateone/logs/gateone.log"
-
-# Remove the auto-generated key/certificate so that a new one gets created the
-# first time the container is started:
-RUN rm -f /etc/gateone/ssl/key.pem && \
-    rm -f /etc/gateone/ssl/certificate.pem
-# (We don't want everyone using the same SSL key/certificate)
+#made transactional to clear up after compiling
+RUN apk add --update --no-cache g++ linux-headers openssl && \
+    pip install -r /tmp/requirements.txt && \
+    cd /gateone/GateOne && \
+    python setup.py install && \
+    /usr/local/bin/gateone --configure \
+    --log_file_prefix="/gateone/logs/gateone.log" && \
+    rm -f /etc/gateone/ssl/key.pem /etc/gateone/ssl/certificate.pem && \
+    apk del g++ linux-headers && \
+    rm -rf /gateone/GateOne
 
 EXPOSE 8000
 
