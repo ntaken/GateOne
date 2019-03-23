@@ -30,39 +30,16 @@
 #
 ############################################################
 
-FROM ubuntu:xenial
+FROM python:2.7-alpine
 
-# Ensure everything is up-to-date
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update --fix-missing && apt-get -y upgrade
-
-# Install dependencies
-RUN apt-get -y \
-    install python-pip \
-    python-imaging \
-    python-setuptools \
-    python-mutagen \
-    python-pam \
-    python-dev \
-    git \
-    telnet \
-    openssh-client && \
-    apt-get -y clean && \
-    apt-get -q -y autoremove
-
-RUN pip install --upgrade pip
 COPY docker/requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 RUN mkdir -p /gateone/logs /gateone/users
 COPY . /gateone/GateOne
 
-
-# Create the necessary directories, clone the repo, and install everything
-RUN mkdir -p /etc/gateone/conf.d && \
-    mkdir -p /etc/gateone/ssl && \
+RUN mkdir -p /etc/gateone/conf.d /etc/gateone/ssl && \
     cd /gateone/GateOne && \
-    python setup.py install && \
-    cp docker/update_and_run_gateone.py /usr/local/bin/update_and_run_gateone
+    python setup.py install
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 
 # This ensures our configuration files/dirs are created:
