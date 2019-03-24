@@ -36,7 +36,7 @@ ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
 COPY docker/requirements.txt /tmp/requirements.txt
 
-RUN mkdir -p /gateone/logs /gateone/users /gateone/Gateone \
+RUN mkdir -p /gateone/logs /gateone/users /gateone/GateOne \
              /etc/gateone/conf.d /etc/gateone/ssl
 
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
