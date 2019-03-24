@@ -39,20 +39,24 @@ COPY docker/requirements.txt /tmp/requirements.txt
 RUN mkdir -p /gateone/logs /gateone/users \
              /etc/gateone/conf.d /etc/gateone/ssl
 
-COPY . /gateone/GateOne
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 
 #made transactional to clear up after compiling
 RUN apk add --update --no-cache g++ linux-headers openssl && \
     pip install -r /tmp/requirements.txt && \
-    cd /gateone/GateOne && \
+    cd /gateone && \
+    wget https://github.com/xykonur/GateOne/archive/master.zip && \
+    unzip master.zip && \
+    rm -f master.zip && \
+    cd GateOne-master && \
     python setup.py install && \
     /usr/local/bin/gateone --configure \
     --log_file_prefix="/gateone/logs/gateone.log" && \
     rm -f /etc/gateone/ssl/key.pem /etc/gateone/ssl/certificate.pem && \
     apk del g++ linux-headers && \
-    rm -rf /gateone/GateOne
+    cd / && \
+    rm -rf /gateone/GateOne-master
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/local/bin/gateone", "--log_file_prefix=/gateone/logs/gateone.log"]
+ENTRYPOINT ["/usr/local/bin/gateone"]
