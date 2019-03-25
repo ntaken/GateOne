@@ -42,7 +42,8 @@ RUN mkdir -p /gateone/logs /gateone/users \
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 
 #made transactional to clear up after compiling
-RUN apk add --update --no-cache g++ linux-headers openssl && \
+RUN apk add --update --no-cache g++ linux-headers \
+             openssh-client openssl && \
     pip install -r /tmp/requirements.txt && \
     cd /gateone && \
     wget https://github.com/xykonur/GateOne/archive/master.zip && \
@@ -51,10 +52,10 @@ RUN apk add --update --no-cache g++ linux-headers openssl && \
     cd GateOne-master && \
     python setup.py install && \
     /usr/local/bin/gateone --configure \
-    --log_file_prefix="/gateone/logs/gateone.log" && \
-    rm -f /etc/gateone/ssl/key.pem /etc/gateone/ssl/certificate.pem && \
+       --log_file_prefix="/gateone/logs/gateone.log" && \
+    cd /etc/gateone/ssl && \
+    rm -f key.pem certificate.pem && \
     apk del g++ linux-headers && \
-    cd / && \
     rm -rf /gateone/GateOne-master
 
 EXPOSE 8000
