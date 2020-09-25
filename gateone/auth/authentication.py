@@ -78,6 +78,11 @@ import tornado.httpclient
 import tornado.gen
 from tornado.options import options
 
+try:
+    import ssl
+except ImportError:
+    ssl = None
+
 # Meta
 __license__ = "AGPLv3 or Proprietary (see LICENSE.txt)"
 __author__ = 'Dan McDougall <daniel.mcdougall@liftoffsoftware.com>'
@@ -107,6 +112,17 @@ def additional_attributes(user, settings_dir=None):
         settings_dir = options.settings_dir
     return user
 
+class SSL101PatchMixin(object):
+    def get_auth_http_client(self):
+        if (ssl is not None and 
+            hasattr(ssl, 'OPENSSL_VERSION_INFO') and
+            ssl.OPENSSL_VERSION_INFO < (1, 0, 2)):
+
+            ca_cert_path = os.getenv('CA_CERT_PATH', '/etc/ssl/certs/ca-certificates.crt')
+            logging.info('Patching tornado HTTP client ssl CA certs for 1.0.1 compatibility (%s)' % ca_cert_path)
+            tornado.httpclient.AsyncHTTPClient.configure(None, defaults=dict(ca_certs=ca_cert_path))
+
+        return tornado.httpclient.AsyncHTTPClient();
 
 # Authentication classes
 class BaseAuthHandler(tornado.web.RequestHandler):
