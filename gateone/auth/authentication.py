@@ -299,7 +299,7 @@ class APIAuthHandler(BaseAuthHandler):
         self.finish()
 
 
-class GoogleAuthHandler(BaseAuthHandler, tornado.auth.GoogleOAuth2Mixin):
+class GoogleAuthHandler(BaseAuthHandler, SSL101PatchMixin, tornado.auth.GoogleOAuth2Mixin):
     """
     Google authentication handler using Tornado's built-in GoogleOAuth2Mixin
     (fairly boilerplate).
