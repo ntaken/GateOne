@@ -476,7 +476,7 @@ var go = GateOne.Base.update(GateOne, {
             go.prefs[setting] = queryPrefs[setting];
         }
         // Make our prefix unique to our location
-        go.prefs.prefix += go.location + '_';
+        go.prefs.prefix += go.location.replace(/\./g, 'dot') + '_';
         // Capabilities Notifications
         if (!go.prefs.skipChecks) {
             if (!WebSocket) {
