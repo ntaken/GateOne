@@ -46,8 +46,8 @@ RUN apk add --update --no-cache g++ linux-headers \
              openssh-client openssl git && \
     pip install -r /tmp/requirements.txt && \
     cd /gateone && \
-    git clone --depth=1 https://github.com/xykonur/gateone.git GateOne-master && \
-    cd GateOne-master && \
+    git clone --depth=1 https://github.com/ntaken/gateone.git GateOne-patch1 && \
+    cd GateOne-patch1 && \
     python setup.py install && \
     /usr/local/bin/gateone --configure \
        --log_file_prefix="/gateone/logs/gateone.log" && \
