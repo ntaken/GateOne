@@ -728,4 +728,3 @@ class CASAuthHandler(BaseAuthHandler):
             self.redirect(next_url)
         else:
             self.redirect(self.settings['url_prefix'])
-© 2020 GitHub, Inc.
