@@ -31,7 +31,7 @@ The Dockerfile along with the update_and_run_gateone.py script and 99docker.conf
 
 You can build your own copy of the liftoff/gateone image using that Dockerfile like so:
 
-    git clone https://github.com/liftoff/GateOne.git # Clone the repo
+    git clone https://github.com/ntaken/GateOne.git # Clone the repo
     cd GateOne/docker
     docker build -t gateone . # Always tag your builds!
 
