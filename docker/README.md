@@ -10,12 +10,12 @@ Using this Image
 
 To run the image in the foreground with pretty-printed log messages, accessible via port 443:
 
-    docker run -t --name=gateone -p 443:8000 liftoff/gateone
+    docker run -t --name=gateone -p 443:8000 image-name
     # Ctrl-C will stop viewing the output but leave the container running
 
 To run the image in the background (e.g. as part of a script):
 
-    docker run -d --name=gateone -p 443:8000 liftoff/gateone
+    docker run -d --name=gateone -p 443:8000 image-name
 
 To stop and start the image after having created a container via 'docker run':
 
