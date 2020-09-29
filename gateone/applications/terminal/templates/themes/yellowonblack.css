@@ -30,7 +30,7 @@
 }
 .✈terminal_pre {
     background-color: #222; /* Not quite black so we can use shadows :) */
-    color: #eee;
+    color: #FFBE1B;
     line-height: 1;
     height: 100%;
     overflow-y: auto;
