@@ -65,8 +65,7 @@ go.Base.update(go.SSH, {
                             }, 500);
                         }
                         if (sshOnce && sshOnce.toLowerCase() == 'true') {
-                            u.removeQueryVariable('ssh'); // Clean up the URL
-                            u.removeQueryVariable('ssh_once');
+                            history.pushState({}, null, location.href.split('?')[0]); // Clean up the URL prettier                         
                             termNum = go.Terminal.newTerminal();
                             connect(termNum);
                         } else {
@@ -111,6 +110,8 @@ go.Base.update(go.SSH, {
                     handleQueryString(str);
                 });
             } else {
+				// End the query regardless allows you to start a new workspace and ssh session to a different target 
+				sshOnce = 'true';
                 handleQueryString(sshQueryString);
             }
         }
