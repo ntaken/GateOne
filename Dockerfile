@@ -46,15 +46,15 @@ RUN apk add --update g++ linux-headers \
              openssh-client openssl git && \
     pip install -r /tmp/requirements.txt && \
     cd /gateone && \
-    git clone --depth=1 https://github.com/ntaken/gateone.git GateOne-master && \
-    cd GateOne-master && \
+    git clone --depth=1 https://github.com/ntaken/gateone.git GateOne-dev && \
+    cd GateOne-dev && \
     python setup.py install && \
     /usr/local/bin/gateone --configure \
        --log_file_prefix="/gateone/logs/gateone.log" && \
     cd /etc/gateone/ssl && \
     rm -f key.pem certificate.pem && \
     apk del g++ linux-headers git && \
-    rm -rf /gateone/GateOne-master && \
+    rm -rf /gateone/GateOne-dev && \
     rm -rf /var/cache/apk/*
 EXPOSE 8000
 
