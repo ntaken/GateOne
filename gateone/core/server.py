@@ -2411,7 +2411,7 @@ class ApplicationWebSocket(WebSocketHandler, OnOffMixin):
             cls.watch_file(broadcast_file, cls.broadcast_file_update)
             io_loop = tornado.ioloop.IOLoop.current()
             cls.file_watcher = tornado.ioloop.PeriodicCallback(
-                cls.file_checker, interval, io_loop=io_loop)
+                cls.file_checker, interval)
             cls.file_watcher.start()
         if options.settings_dir not in cls.watched_files:
             cls.watch_file(options.settings_dir, cls.load_prefs)

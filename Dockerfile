@@ -42,7 +42,7 @@ RUN mkdir -p /gateone/logs /gateone/users \
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 
 #made transactional to clear up after compiling
-RUN apk add --update --no-cache g++ linux-headers \
+RUN apk add --update g++ linux-headers \
              openssh-client openssl git && \
     pip install -r /tmp/requirements.txt && \
     cd /gateone && \
@@ -54,8 +54,8 @@ RUN apk add --update --no-cache g++ linux-headers \
     cd /etc/gateone/ssl && \
     rm -f key.pem certificate.pem && \
     apk del g++ linux-headers git && \
-    rm -rf /gateone/GateOne-master
-
+    rm -rf /gateone/GateOne-master && \
+    rm -rf /var/cache/apk/*
 EXPOSE 8000
 
 ENTRYPOINT ["/usr/local/bin/gateone"]
