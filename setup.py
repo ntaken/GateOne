@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from distutils.command.install import INSTALL_SCHEMES
+import sys
+import os
+import shutil
+import io
 from setuptools import setup
 from setuptools.command.install import install
-from distutils.command.install import INSTALL_SCHEMES
-import sys, os, shutil, io
 
 for scheme in INSTALL_SCHEMES.values():
     scheme['data'] = scheme['purelib']

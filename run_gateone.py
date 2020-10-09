@@ -7,7 +7,8 @@ setup.py please use the 'gateone' script which gets installed in your $PATH
 automatically.
 """
 
-import os, sys
+import os 
+import sys
 
 WORKING_DIR = os.path.dirname(os.path.abspath(__file__))
 setup_py = os.path.join(WORKING_DIR, 'setup.py')
@@ -29,6 +30,7 @@ if not os.path.isdir(egg_info_dir):
             "Error: Could not create %s.  Permissions problem?" % egg_info_dir)
         sys.exit(2)
 
-from gateone.core.server import main
+# Does not do anything. What should it do?
+from gateone.core.server import main  
 
 main(installed=False)
