@@ -1,5 +1,5 @@
 cssmin==0.2.*
 futures==3.2.*
 psutil==5.4.*
-slimit==0.8.*
+git+https://github.com/rspivak/slimit.git#egg=slimit
 tornado==4.5.*
