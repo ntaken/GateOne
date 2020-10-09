@@ -46,7 +46,7 @@ RUN apk add --update g++ linux-headers \
              openssh-client openssl git && \
     pip install -r /tmp/requirements.txt && \
     cd /gateone && \
-    git clone --depth=1 https://github.com/ntaken/gateone.git GateOne-dev && \
+    git clone --depth=1 https://github.com/ntaken/gateone.git#dev GateOne-dev && \
     cd GateOne-dev && \
     python setup.py install && \
     /usr/local/bin/gateone --configure \
