@@ -54,7 +54,8 @@ RUN apk add --update --no-cache g++ linux-headers \
     cd /etc/gateone/ssl && \
     rm -f key.pem certificate.pem && \
     apk del g++ linux-headers git && \
-    rm -rf /gateone/GateOne-master
+    rm -rf /gateone/GateOne-master && \
+    rm -rf /var/cache/apk/*
 
 EXPOSE 8000
 
