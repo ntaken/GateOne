@@ -316,7 +316,7 @@ setup(
     author_email = 'daniel.mcdougall@liftoffsoftware.com',
     install_requires = requires,
     zip_safe = False, # TODO: Convert everything to using pkg_resources
-    py_modules = ["gateone"],
+    py_modules = ["gateone.core.server"],
     entry_points = entry_points,
     provides = ['gateone', 'termio', 'terminal', 'onoff'],
     packages = packages,
