@@ -22,7 +22,7 @@ data_files = []
 package_data = []
 
 major, minor = sys.version_info[:2] # Python version
-if major == 2 and minor <=5:
+if major == 2 and minor <= 5:
     print("Gate One requires Python 2.6+.  You are running %s" % sys.version)
     sys.exit(1)
 if major == 2:

@@ -152,6 +152,7 @@ from array import array
 from datetime import datetime, timedelta
 from functools import partial
 from collections import defaultdict
+from itertools import imap, izip
 try:
     from collections import OrderedDict
 except ImportError: # Python <2.7 didn't have OrderedDict in collections
@@ -164,11 +165,6 @@ except ImportError: # Python <2.7 didn't have OrderedDict in collections
         logging.error(
             "...or download it from http://pypi.python.org/pypi/ordereddict")
         sys.exit(1)
-try:
-    from itertools import imap, izip
-    pass
-except ImportError:  # Python 3 doesn't have imap or izip in itertool        
-    imap, izip = map, zip       
 try:
     xrange = xrange
 except NameError:  # Python 3 doesn't have xrange()
@@ -1590,7 +1586,7 @@ class PDFFile(FileType):
         If available, will use ghostscript (gs) to generate a thumbnail of this
         PDF in the form of an <img> tag with the src set to a data::URI.
         """
-        from commands import getstatusoutput
+        from commands import getstatusoutput  #No check for Python2 or 3? 
         thumb = tempfile.NamedTemporaryFile()
         params = [
             'gs', # gs must be in your path

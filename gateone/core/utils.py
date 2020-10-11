@@ -364,7 +364,7 @@ def shell_command(cmd, timeout_duration=5):
 
         (255, _("ERROR: Timeout running shell command"))
     """
-    from commands import getstatusoutput
+    from commands import getstatusoutput  #No check for Python2 or 3? 
     existing_handler = signal.getsignal(signal.SIGCHLD)
     default = (255, _("ERROR: Timeout running shell command"))
     if existing_handler != 0: # Something other than default

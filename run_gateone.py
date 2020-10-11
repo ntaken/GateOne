@@ -7,7 +7,7 @@ setup.py please use the 'gateone' script which gets installed in your $PATH
 automatically.
 """
 
-import os 
+import os
 import sys
 
 WORKING_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +31,6 @@ if not os.path.isdir(egg_info_dir):
         sys.exit(2)
 
 # Does not do anything. What should it do?
-from gateone.core.server import main  
+from gateone.core.server import main
 
 main(installed=False)
