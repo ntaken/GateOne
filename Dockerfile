@@ -34,12 +34,19 @@ FROM python:2.7-alpine
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
+
 COPY docker/requirements.txt /tmp/requirements.txt
 
 RUN mkdir -p /gateone/logs /gateone/users \
              /etc/gateone/conf.d /etc/gateone/ssl
 
 COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
+
+# Create a system user group 'gateone'
+RUN addgroup -S gateone
+
+# Create a system user 'gateone' under 'gateone'
+RUN adduser -S -D -H gateone gateone
 
 #made transactional to clear up after compiling
 RUN apk add --update g++ linux-headers \
@@ -57,17 +64,11 @@ RUN apk add --update g++ linux-headers \
     rm -rf /gateone/GateOne && \
     rm -rf /var/cache/apk/*
 
-# Create a system user group 'gateone'
-RUN addgroup -S gateone
-
-# Create a system user 'gateone' under 'gateone'
-RUN adduser -S -D -H gateone gateone
-
-# Chown all the files to the user.
+# Chown necessary files to the user.
 RUN chown -R gateone:gateone /gateone && \
 RUN chown -R gateone:gateone /etc/gateone 
 
-# Switch to 'gatone'
+# Switch to 'gateone'
 USER gateone
 
 EXPOSE 8000
