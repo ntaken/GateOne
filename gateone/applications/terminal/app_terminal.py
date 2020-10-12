@@ -2765,7 +2765,7 @@ def init(settings):
                 '/plugins/ssh/scripts/ssh_connect.py')
             default_command = (
               "{0} -S "
-              r"'%SESSION_DIR%/%SESSION%/%SHORT_SOCKET%' "
+              r"'%SESSION_DIR%/%SESSION%/%SHORT_SOCKET%' --sshfp "
               r"-a '-oUserKnownHostsFile=\"%USERDIR%/%USER%/.ssh/known_hosts\"'"
             ).format(ssh_connect_path)
             settings['*']['terminal'].update({
