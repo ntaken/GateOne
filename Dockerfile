@@ -56,6 +56,20 @@ RUN apk add --update g++ linux-headers \
     apk del g++ linux-headers git && \
     rm -rf /gateone/GateOne && \
     rm -rf /var/cache/apk/*
+
+# Create a system user group 'gateone'
+RUN addgroup -S gateone
+
+# Create a system user 'gateone' under 'gateone'
+RUN adduser -S -D -H gateone gateone
+
+# Chown all the files to the user.
+RUN chown -R gateone:gateone /gateone && \
+RUN chown -R gateone:gateone /etc/gateone 
+
+# Switch to 'gatone'
+USER gateone
+
 EXPOSE 8000
 
 ENTRYPOINT ["/usr/local/bin/gateone"]

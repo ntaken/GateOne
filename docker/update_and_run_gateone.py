@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 """
+2020-10-12 Not currently used.
+
 Checks if Gate One is up-to-date inside the container by performing a
 `git pull`.  If new code was pulled it will be automatically installed via
 `python setup.py install`
