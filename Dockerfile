@@ -46,7 +46,7 @@ COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 RUN addgroup -S gateone
 
 # Create a system user 'gateone' under 'gateone'
-RUN adduser -S -D -H gateone gateone
+RUN adduser -S -D -h /gateone gateone gateone
 
 #made transactional to clear up after compiling
 RUN apk add --update g++ linux-headers \
@@ -65,12 +65,11 @@ RUN apk add --update g++ linux-headers \
     rm -rf /var/cache/apk/*
 
 # Chown necessary files to the user.
-RUN chown -R gateone:gateone /gateone && \
-RUN chown -R gateone:gateone /etc/gateone 
+RUN chown -R gateone:gateone /gateone /etc/gateone 
 
 # Switch to 'gateone'
-USER gateone
+# USER gateone
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/local/bin/gateone"]
+ENTRYPOINT ["/usr/local/bin/python", "/usr/local/bin/gateone"]
