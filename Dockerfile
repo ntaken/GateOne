@@ -65,11 +65,8 @@ RUN apk add --update g++ linux-headers \
     rm -rf /var/cache/apk/*
 
 # Chown necessary files to the user.
-RUN chown -R gateone:gateone /gateone /etc/gateone 
-
-# Switch to 'gateone'
-# USER gateone
+RUN chown -R gateone:gateone /gateone /etc/gateone /usr/local/lib/python2.7/site-packages/gateone-1.2.0-py2.7.egg
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/local/bin/python", "/usr/local/bin/gateone"]
+ENTRYPOINT ["/usr/local/bin/gateone"]
