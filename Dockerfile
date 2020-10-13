@@ -50,7 +50,8 @@ RUN adduser -S -D -h /gateone gateone gateone
 
 #made transactional to clear up after compiling
 RUN apk add --update g++ linux-headers \
-             openssh-client openssl git && \
+             openssh-client python2-dev git && \
+	pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt && \
     cd /gateone && \
     git clone -b dev --depth=1 https://github.com/ntaken/gateone.git GateOne && \
