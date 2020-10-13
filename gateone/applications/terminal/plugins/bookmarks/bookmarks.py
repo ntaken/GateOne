@@ -613,7 +613,7 @@ class ExportHandler(tornado.web.RequestHandler):
     Takes a JSON-encoded list of bookmarks and returns a Netscape-style HTML
     file.
     """
-    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def post(self):
         bookmarks = self.get_argument("bookmarks")
         bookmarks = tornado.escape.json_decode(bookmarks)
