@@ -2,4 +2,4 @@ cssmin
 futures
 psutil
 git+https://github.com/rspivak/slimit.git#egg=slimit
-tornado
+tornado==4.5.3
