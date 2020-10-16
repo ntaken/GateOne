@@ -45,11 +45,11 @@ COPY docker/60docker.conf /etc/gateone/conf.d/60docker.conf
 # Create a system user group 'gateone'
 RUN addgroup -S gateone
 
-# Create a system user 'gateone' under 'gateone'
+# Create a system user 'gateone' under group 'gateone'
 RUN adduser -S -D -h /gateone gateone gateone
 
 #made transactional to clear up after compiling
-RUN apk add --update g++ linux-headers \
+RUN apk add --update g++ linux-headers telnet \
              openssh-client openssl git && \
 	pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt && \
@@ -68,6 +68,8 @@ RUN apk add --update g++ linux-headers \
 # Chown necessary files to the user.
 RUN chown -R gateone:gateone /gateone /etc/gateone /usr/local/lib/python2.7/site-packages/gateone-1.2.0-py2.7.egg
 
+# USER gateone # Disable switch because gateone needs to be able to generate new key.pem certificate.pem 
+	       # GateOne will be run by gateone user regardless  
 EXPOSE 8000
 
 ENTRYPOINT ["/usr/local/bin/gateone"]
