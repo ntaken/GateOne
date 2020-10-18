@@ -49,7 +49,7 @@ RUN addgroup -S gateone
 RUN adduser -S -D -h /gateone gateone gateone
 
 #made transactional to clear up after compiling
-RUN apk add --update g++ linux-headers \
+RUN apk add --update g++ linux-headers busybox-extras \
              openssh-client openssl git && \
 	pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt && \
