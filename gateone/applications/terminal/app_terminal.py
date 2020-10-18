@@ -2825,6 +2825,8 @@ def init(settings):
             pass # No hooks, no problem
     # Add static handlers for all the JS plugins (primarily for source maps)
     url_prefix = settings['*']['gateone']['url_prefix']
+    if not url_prefix.endswith('/'): # Made sure url_prefix ends with '/' like '/gateone/'
+        url_prefix = (url_prefix + '/')
     plugins = set(
         plugins['py'].keys() + plugins['js'].keys() + plugins['css'].keys())
     for plugin in plugins:
