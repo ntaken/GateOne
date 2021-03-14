@@ -45,7 +45,8 @@ SSH_SOCKET='{socket}'
 trap "rm -f {temp}" EXIT
 {cmd}
 echo '[Press Enter to close this terminal]'
-read waitforuser
+# read waitforuser
+sleep 30
 rm -f {temp} # Cleanup
 exit 0
 """
