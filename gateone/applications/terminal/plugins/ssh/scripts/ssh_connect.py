@@ -45,9 +45,10 @@ SSH_SOCKET='{socket}'
 trap "rm -f {temp}" EXIT
 {cmd}
 echo '[Press Enter to close this terminal]'
-#read waitforuser
-sleep 5
-rm -f {temp} # Cleanup
+rm -f {temp} # Cleanup test if early cleanup allow new connection
+read waitforuser
+# sleep 30
+# rm -f {temp} # Cleanup
 exit 0
 """
 # We have the little "wait for user" bit so users can see the ouput of a
