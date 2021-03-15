@@ -93,7 +93,7 @@ Also, in most cases it is unwise to override CALLBACK_MODE since this method is 
 Using Terminal
 --------------
 Gate One makes extensive use of the Terminal class and its callbacks.  So that's
-a great place to look for specific examples (gateone.py and termio.py,
+a great place to look for specific examples (server.py and termio.py,
 specifically).  Having said that, implementing Terminal is pretty
 straightforward::
 
